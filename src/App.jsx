@@ -12,14 +12,10 @@ function App() {
   const [cart, setCart] = useState([]);
 
   // const sortOptions = [
-  //   "Featured",
-  //   "Best Selling",
   //   "Alphabetically, A-Z",
   //   "Alphabetically, Z-A",
   //   "Price, low to high",
   //   "Price, high to low",
-  //   "Date, new to old",
-  //   "Date, old to new",
   // ];
 
   useEffect(() => {
@@ -55,40 +51,33 @@ function App() {
     }
   };
 
-  // const handleSortChange = (sortOp) => {
-  //   console.log(sortOp);
-  //   const copyProducts = [...filteredProducts];
+  const handleSortChange = (sortOp) => {
+    console.log(sortOp);
+    const copyProducts = [...filteredProducts];
 
-  //   switch (sortOp) {
-  //     // case "Best Selling":
-  //     //   break;
-  //     case "Alphabetically, A-Z":
-  //       copyProducts.sort((a, b) =>
-  //         a.title.localeCompare(b.title, undefined, { sensitivity: "base" })
-  //       );
-  //       break;
-  //     case "Alphabetically, Z-A":
-  //       copyProducts.sort((a, b) =>
-  //         b.title.localeCompare(a.title, undefined, { sensitivity: "base" })
-  //       );
-  //       break;
-  //     case "Price, low to high":
-  //       copyProducts.sort((a, b) => a.price - b.price);
-  //       break;
-  //     case "Price, high to low":
-  //       copyProducts.sort((a, b) => b.price - a.price);
-  //       break;
-  //     // case "Date, new to old":
-  //     //   break;
-  //     // case "Date, old to new":
-  //     //   break;
-  //     case "Featured":
-  //     default:
-  //       break;
-  //   }
+    switch (sortOp) {
+      case "Alphabetically, A-Z":
+        copyProducts.sort((a, b) =>
+          a.title.localeCompare(b.title, undefined, { sensitivity: "base" })
+        );
+        break;
+      case "Alphabetically, Z-A":
+        copyProducts.sort((a, b) =>
+          b.title.localeCompare(a.title, undefined, { sensitivity: "base" })
+        );
+        break;
+      case "Price, low to high":
+        copyProducts.sort((a, b) => a.price - b.price);
+        break;
+      case "Price, high to low":
+        copyProducts.sort((a, b) => b.price - a.price);
+        break;
+      default:
+        break;
+    }
 
-  //   setFilteredProducts(copyProducts);
-  // };
+    setFilteredProducts(copyProducts);
+  };
 
   const handleAddProd = (productId) => {
     setCart((prevCart) => {
@@ -125,30 +114,20 @@ function App() {
     });
   };
 
-  // const inputRef = useRef(null);
 
-  // const handleClick = () => {
-  //   inputRef.current.focus();
-  //   inputRef.current.style.background = "red";
-  //   inputRef.current.style.width = "200px";
-  //   inputRef.current.style.height = "100px";
-  // };
   return (
     <ShopContext.Provider
       value={{
         products: filteredProducts,
         categories,
         handleCatChange,
+        handleSortChange,
         cart,
         handleAddProd,
         handleRemoveProd,
       }}
     >
       <>
-        {/* <button onClick={handleClick}>click me for focusing the input</button>
-      <input ref={inputRef} />
-      */}
-        {/* <OTPInput /> */}
         <NavSection />
         <ProductsSection />
       </>

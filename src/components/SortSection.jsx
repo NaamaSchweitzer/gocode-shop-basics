@@ -3,16 +3,22 @@ import { ShopContext } from "../ShopContext";
 import { FilterSortComp } from "./FilterSortComp";
 
 export const SortSection = () => {
-  const { categories, handleCatChange } = useContext(ShopContext);
-  const sortOptions = [
-    "Featured",
-    "Best Selling",
+  const { categories, handleCatChange, handleSortChange } = useContext(ShopContext);
+  // const sortOptions = [
+  //   "Featured",
+  //   "Best Selling",
+  //   "Alphabetically, A-Z",
+  //   "Alphabetically, Z-A",
+  //   "Price, low to high",
+  //   "Price, high to low",
+  //   "Date, new to old",
+  //   "Date, old to new",
+  // ];
+    const sortOptions = [
     "Alphabetically, A-Z",
     "Alphabetically, Z-A",
     "Price, low to high",
     "Price, high to low",
-    "Date, new to old",
-    "Date, old to new",
   ];
   return (
     <div className="sort">
@@ -22,7 +28,7 @@ export const SortSection = () => {
         listOfOptions={categories}
       />
       <FilterSortComp
-        onSelect={() => console.log("not working yet")}
+        onSelect={handleSortChange}
         label={"Sort by:"}
         listOfOptions={sortOptions}
       />

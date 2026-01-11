@@ -23,7 +23,7 @@ export const ProductCard = (props) => {
       </div>
       <div className="product-info">
         <h5>{itemName}</h5>
-        <h6>{price}</h6>
+        <h6>{price + "$"}</h6>
       </div>
     </div>
   );
