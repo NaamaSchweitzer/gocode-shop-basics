@@ -9,6 +9,7 @@ import { handleProducts } from "./api/products-functions";
 export const Router = () => {
   const [categories, setCategories] = useState([]);
   const [cart, setCart] = useState([]);
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
   const [categoryFilter, setCategoryFilter] = useState("All Items");
   const [sortMethod, setSortMethod] = useState("");
@@ -47,7 +48,9 @@ export const Router = () => {
       // product already in cart
       if (cartItem) {
         return prevCart.map((item) =>
-          item._id === cartItem._id ? { ...item, amount: item.amount + 1 } : item,
+          item._id === cartItem._id
+            ? { ...item, amount: item.amount + 1 }
+            : item,
         );
       }
       // else: new product added to cart
@@ -99,6 +102,8 @@ export const Router = () => {
         setPriceRange,
         priceBounds,
         cart,
+        isCartOpen,
+        setIsCartOpen,
         handleAddProd,
         handleRemoveProd,
       }}

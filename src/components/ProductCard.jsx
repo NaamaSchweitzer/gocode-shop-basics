@@ -30,7 +30,7 @@ export const ProductCard = (props) => {
       </div>
       <div className="product-info">
         <h5>{props.itemName}</h5>
-        <h6>{props.price}</h6>
+        <h6>${props.price}</h6>
       </div>
     </div>
   );
