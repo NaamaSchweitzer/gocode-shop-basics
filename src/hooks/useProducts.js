@@ -5,13 +5,21 @@ import { handleProducts } from "../api/products-functions";
 import { transformProducts } from "../utils/product-utils";
 
 export const useProducts = () => {
-  const { categoryFilter = "", sortMethod } = useContext(ShopContext);
+  const {
+    categoryFilter = "",
+    sortMethod,
+    priceRange,
+  } = useContext(ShopContext);
 
   return useQuery({
     queryKey: ["all-products"],
     queryFn: handleProducts,
     select: (data) =>
-      transformProducts(data, { category: categoryFilter, sortMethod }),
+      transformProducts(data, {
+        category: categoryFilter,
+        sortMethod,
+        priceRange,
+      }),
     staleTime: 1000 * 60 * 5,
   });
 };

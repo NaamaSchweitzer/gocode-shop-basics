@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router";
 import App from "./App";
 import { ProductDetailsPage } from "./pages/ProductDetailsPage";
 import { ShopContext } from "./ShopContext";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { handleProducts } from "./api/products-functions";
 
@@ -12,11 +12,21 @@ export const Router = () => {
 
   const [categoryFilter, setCategoryFilter] = useState("All Items");
   const [sortMethod, setSortMethod] = useState("");
+  const [priceRange, setPriceRange] = useState([0, 0]);
 
   const { data: allProducts = [] } = useQuery({
     queryKey: ["all-products"],
     queryFn: handleProducts,
   });
+
+  const priceBounds = useMemo(() => {
+    if (!allProducts.length) return { minPrice: 0, maxPrice: 0 };
+    const prices = allProducts.map((p) => p.price);
+    return {
+      minPrice: Math.floor(Math.min(...prices)),
+      maxPrice: Math.ceil(Math.max(...prices)),
+    };
+  }, [allProducts]);
 
   useEffect(() => {
     const cat = allProducts
@@ -85,6 +95,9 @@ export const Router = () => {
         setCategoryFilter,
         sortMethod,
         setSortMethod,
+        priceRange,
+        setPriceRange,
+        priceBounds,
         cart,
         handleAddProd,
         handleRemoveProd,

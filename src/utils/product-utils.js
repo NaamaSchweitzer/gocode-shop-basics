@@ -3,15 +3,15 @@
  */
 export const transformProducts = (
   allData,
-  { category, sortMethod }, // for filters and sortMethod
+  { category, sortMethod, priceRange },
 ) => {
   if (!allData) return [];
 
-  // 1. Filter by Category (and other filters)
+  // 1. Filter by Category and Price
   const filtered = allData.filter((p) => {
     const matchesCategory = category === "All Items" || p.category === category;
-    // apply other filters with the same approach
-    return matchesCategory; // && matchesOtherFilters
+    const matchesPrice = p.price >= priceRange[0] && p.price <= priceRange[1];
+    return matchesCategory && matchesPrice;
   });
 
   // 2. Sort the filtered results
