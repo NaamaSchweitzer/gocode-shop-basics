@@ -43,15 +43,15 @@ export const Router = () => {
 
   const handleAddProd = (productId) => {
     setCart((prevCart) => {
-      const cartItem = prevCart.find((item) => item.id === productId);
+      const cartItem = prevCart.find((item) => item._id === productId);
       // product already in cart
       if (cartItem) {
         return prevCart.map((item) =>
-          item.id === cartItem.id ? { ...item, amount: item.amount + 1 } : item,
+          item._id === cartItem._id ? { ...item, amount: item.amount + 1 } : item,
         );
       }
       // else: new product added to cart
-      const product = allProducts.find((p) => p.id === productId);
+      const product = allProducts.find((p) => p._id === productId);
 
       //if (!product) return console.error();
 
@@ -61,17 +61,17 @@ export const Router = () => {
 
   const handleRemoveProd = (productId) => {
     setCart((prevCart) => {
-      const cartItem = prevCart.find((item) => item.id === productId);
+      const cartItem = prevCart.find((item) => item._id === productId);
 
       if (!cartItem) return prevCart;
 
       if (cartItem.amount === 1) {
         // remove item from cart
-        return prevCart.filter((item) => item.id !== cartItem.id);
+        return prevCart.filter((item) => item._id !== cartItem._id);
       }
 
       return prevCart.map((item) =>
-        item.id === cartItem.id ? { ...item, amount: item.amount - 1 } : item,
+        item._id === cartItem._id ? { ...item, amount: item.amount - 1 } : item,
       );
     });
   };

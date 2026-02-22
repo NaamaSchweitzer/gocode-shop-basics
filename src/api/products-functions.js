@@ -1,5 +1,5 @@
-// const API_URL = "http://localhost:3000"
-const API_URL = "https://fakestoreapi.com";
+const API_URL = "http://localhost:3000/api"
+// const API_URL = "https://fakestoreapi.com";
 
 export const handleProducts = async () => {
   const response = await fetch(`${API_URL}/products`);

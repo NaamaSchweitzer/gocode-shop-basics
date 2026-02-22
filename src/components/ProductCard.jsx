@@ -1,29 +1,36 @@
 import { useNavigate } from "react-router";
 import { ShopContext } from "../ShopContext";
+import { useContext } from "react";
 
 export const ProductCard = (props) => {
-  const { img, itemName, price, amount, onAdd, onRemove, productId } = props;
+  const { cart, handleAddProd, handleRemoveProd } = useContext(ShopContext);
+
   const navigate = useNavigate();
 
+  const amount = cart.find((item) => item._id === props._id)?.amount || 0;
+
   const handleImageClick = () => {
-    navigate(`/products/${productId}`);
+    navigate(`/products/${props._id}`);
   };
 
   return (
     <div className="product-card">
-      {/* <button onClick={handleImageClick }> */}
       <div className="product-image" onClick={handleImageClick}>
-        <img src={img} />
+        <img src={props.img} />
       </div>
-      {/* </button> */}
       <div className="product-amount">
-        <button onClick={onRemove}>-</button>
+        <button
+          onClick={() => handleRemoveProd(props._id)}
+          disabled={amount === 0}
+        >
+          -
+        </button>
         <input value={amount} type="text" readOnly />
-        <button onClick={onAdd}>+</button>
+        <button onClick={() => handleAddProd(props._id)}>+</button>
       </div>
       <div className="product-info">
-        <h5>{itemName}</h5>
-        <h6>{price}</h6>
+        <h5>{props.itemName}</h5>
+        <h6>{props.price}</h6>
       </div>
     </div>
   );
