@@ -5,6 +5,7 @@ import { ShopContext } from "./ShopContext";
 import { useEffect, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { handleProducts } from "./api/products-functions";
+import { AdminPage } from "./pages/AdminPage";
 
 export const Router = () => {
   const [categories, setCategories] = useState([]);
@@ -87,6 +88,10 @@ export const Router = () => {
     {
       path: "/products/:productId",
       Component: ProductDetailsPage,
+    },
+    {
+      path: "/admin",
+      Component: AdminPage,
     },
   ]);
 
