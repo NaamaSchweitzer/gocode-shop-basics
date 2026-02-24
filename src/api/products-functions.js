@@ -1,5 +1,6 @@
-const API_URL = "http://localhost:3000/api";
+// const API_URL = "http://localhost:3000/api";
 // const API_URL = "https://fakestoreapi.com";
+const API_URL = "https://gocode-server.onrender.com/api"
 
 export const handleProducts = async () => {
   const response = await fetch(`${API_URL}/products`);
@@ -43,3 +44,5 @@ export const deleteProduct = async (id) => {
   if (!response.ok) throw new Error("Failed to delete product");
   return response.json();
 };
+
+// export const isAdmin = async ()

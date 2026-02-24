@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { handleProducts } from "./api/products-functions";
 import { AdminPage } from "./pages/AdminPage";
+import { NotFoundPage } from "./pages/NotFoundPage";
 
 export const Router = () => {
   const [categories, setCategories] = useState([]);
@@ -92,6 +93,10 @@ export const Router = () => {
     {
       path: "/admin",
       Component: AdminPage,
+    },
+    {
+      path: "*",
+      Component: NotFoundPage,
     },
   ]);
 
