@@ -23,9 +23,11 @@ import {
 } from "../api/products-functions";
 import { ProductFormModal } from "../components/ProductFormModal";
 import { ProductsTable } from "../components/ProductsTable";
+import { useNavigate } from "react-router";
 
 export const AdminPage = () => {
   const { data: products = [], isLoading, isError } = useAllProductsRaw();
+  const navigate = useNavigate();
 
   const [open, setOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
@@ -85,6 +87,13 @@ export const AdminPage = () => {
 
   return (
     <Container sx={{ py: 4 }}>
+      <Box sx={{ mb: 2 }}>
+        <Button variant="outlined" size="small" onClick={() => navigate("/")}>
+          Home Page
+        </Button>
+      </Box>
+
+      {/* Header */}
       <Stack
         direction="row"
         justifyContent="space-between"

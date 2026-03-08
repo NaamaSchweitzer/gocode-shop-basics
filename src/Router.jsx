@@ -23,14 +23,38 @@ export const Router = () => {
   });
 
   const priceBounds = useMemo(() => {
-    if (!allProducts.length) return { minPrice: 0, maxPrice: 0 };
+    if (!allProducts.length) return { min: 0, max: 0 };
     const prices = allProducts.map((p) => p.price);
     return {
-      minPrice: Math.floor(Math.min(...prices)),
-      maxPrice: Math.ceil(Math.max(...prices)),
+      min: Math.floor(Math.min(...prices)),
+      max: Math.ceil(Math.max(...prices)),
     };
   }, [allProducts]);
 
+  // price range updates
+  useEffect(() => {
+    setPriceRange((prev) => {
+      const [prevMin, prevMax] = prev;
+
+      // first init
+      if (prevMin === 0 && prevMax === 0) {
+        return [priceBounds.min, priceBounds.max];
+      }
+
+      // update selected price range only if necessary
+      const nextMin = Math.max(prevMin, priceBounds.min);
+      const nextMax = Math.min(prevMax, priceBounds.max);
+
+      // if range became invalid, reset to full bounds
+      if (nextMin > nextMax) {
+        return [priceBounds.min, priceBounds.max];
+      }
+
+      return [nextMin, nextMax];
+    });
+  }, [priceBounds]);
+
+  // categories updates
   useEffect(() => {
     const cat = allProducts
       ?.map((p) => p.category)
